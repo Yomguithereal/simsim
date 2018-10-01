@@ -1,0 +1,6 @@
+fog
+ipysigma
+jupyter
+networkx
+python-louvain
+tqdm
