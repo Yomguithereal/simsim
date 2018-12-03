@@ -15,13 +15,13 @@
   "dependencies": {
     "d3-scale": "^2.1.2",
     "events": "^3.0.0",
-    "graphology": "^0.13.1",
+    "graphology": "^0.14.0",
     "graphology-layout": "^0.1.0",
     "graphology-layout-forceatlas2": "^0.2.1",
     "graphology-metrics": "^1.6.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "sigma": "^2.0.0-alpha18",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
+    "sigma": "2.0.0-alpha20",
     "simple-statistics": "^6.1.1"
   }
 }

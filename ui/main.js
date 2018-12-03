@@ -185,7 +185,7 @@ communities.forEach((c, i) => {
   c.forEach(node => {
     macro.mergeNodeAttributes(node, {
       community: i,
-      color: PALETTE[i]
+      color: PALETTE[i] || '#ddd'
     });
   });
 });
@@ -197,7 +197,7 @@ communities.forEach((c, i) => {
 
   const d = DATA.micro[i];
 
-  c.forEach(node => g.addNode(node, {label: node, color: PALETTE[i]}));
+  c.forEach(node => g.addNode(node, {label: node, color: PALETTE[i] || '#ddd'}));
 
   d.edges.forEach(([source, target, similarity]) => {
     g.addEdge(source, target, {similarity});
@@ -217,7 +217,7 @@ communities.forEach((c, i) => {
 
   DATA.micro[i].graph = g;
   DATA.micro[i].label = bestLabel.node;
-  DATA.micro[i].color = PALETTE[i];
+  DATA.micro[i].color = PALETTE[i] || '#ddd';
 });
 
 // Rendering
