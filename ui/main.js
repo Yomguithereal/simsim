@@ -45,12 +45,12 @@ class Network extends Component {
     if (this.props.own) {
       // TODO: fix in sigma
       var nodes = new Set();
-      this.renderer.on('overNode', data => {
+      this.renderer.on('enterNode', data => {
         nodes.add(data.node);
         this.props.own.emit('over', data.node);
       });
 
-      this.renderer.on('outNode', data => {
+      this.renderer.on('leaveNode', data => {
         nodes.forEach(node => this.props.own.emit('out', node));
         nodes.clear();
       });
@@ -229,3 +229,5 @@ const body = (
 )
 
 render(body, document.getElementById('app'));
+
+window.macro = macro;
