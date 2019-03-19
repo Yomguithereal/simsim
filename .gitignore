@@ -1,2 +1,4 @@
 .ipynb_checkpoints
 __pycache__
+det_ingrs.json
+det_ingrs_recipes.json
