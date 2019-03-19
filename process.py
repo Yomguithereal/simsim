@@ -6,7 +6,7 @@ from tqdm import tqdm
 from utils import compute_similarity_matrix, compute_similarity_graph
 
 # Parameters
-RECIPES_PATH = './recipes.json'
+RECIPES_PATH = './det_ingrs_recipes.json'
 OUTPUT_PATH = './data.json'
 FREQUENCY_THRESHOLD = 10
 

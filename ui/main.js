@@ -12,16 +12,21 @@ import EventEmitter from 'events';
 import DATA from '../data.json';
 
 const PALETTE = [
-  '#ce6f3b',
-  '#7b66cf',
-  '#64ac48',
-  '#c84fb4',
-  '#4aac8b',
-  '#cf5062',
-  '#628ccb',
-  '#a39440',
-  '#d68cc6',
-  '#9c4a7b'
+  '#d35238',
+  '#57ba52',
+  '#b752ba',
+  '#a0b433',
+  '#6b6aca',
+  '#d69b36',
+  '#5e96d0',
+  '#727229',
+  '#d14176',
+  '#51bba0',
+  '#c07dba',
+  '#438649',
+  '#c0636f',
+  '#a9b266',
+  '#b87645'
 ];
 
 const MACRO_SOURCE = new EventEmitter(),
@@ -167,6 +172,9 @@ const communities = DATA.micro.map(m => new Set(m.nodes));
 const macro = new UndirectedGraph();
 
 DATA.macro.edges.forEach(([source, target, similarity]) => {
+  if (source === target)
+    return;
+
   macro.mergeEdge(source, target, {similarity});
 });
 
