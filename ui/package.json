@@ -15,7 +15,9 @@
   "dependencies": {
     "d3-scale": "^2.1.2",
     "events": "^3.0.0",
+    "file-saver": "^2.0.1",
     "graphology": "^0.14.0",
+    "graphology-gexf": "^0.5.0",
     "graphology-layout": "^0.1.0",
     "graphology-layout-forceatlas2": "^0.2.1",
     "graphology-metrics": "^1.6.0",

@@ -6,6 +6,8 @@ import circularLayout from 'graphology-layout/circular';
 import {inferSettings} from 'graphology-layout-forceatlas2';
 import FA2Layout from 'graphology-layout-forceatlas2/worker';
 import extent from 'simple-statistics/src/extent';
+import gexf from 'graphology-gexf/browser';
+import {saveAs} from 'file-saver';
 import {scaleLinear} from 'd3-scale';
 import EventEmitter from 'events';
 
@@ -40,6 +42,7 @@ class Network extends Component {
     this.layoutSettings = inferSettings(this.props.graph);
 
     this.handleLayout = this.handleLayout.bind(this);
+    this.download = this.download.bind(this);
   }
 
   spawnRenderer() {
@@ -92,6 +95,14 @@ class Network extends Component {
     this.layout.stop();
   }
 
+  download() {
+    const data = gexf.write(this.props.graph);
+
+    const blob = new Blob([data], {type: "application/gexf;charset=utf-8"});
+
+    saveAs(blob, 'graph.gexf');
+  }
+
   render() {
     const offset = this.props.offset || 0;
 
@@ -106,6 +117,13 @@ class Network extends Component {
         <p style={{position: 'absolute', top: `${20 + offset}px`, left: '10px', zIndex: 30}}>
           Threshold: {this.props.threshold.toFixed(2)}
         </p>
+        {this.props.canDownload && (
+          <button
+            style={{position: 'absolute', bottom: `${20 + offset}px`, left: '10px', zIndex: 30}}
+            onClick={this.download}>
+            Download gexf
+          </button>
+        )}
       </div>
     );
   }
@@ -157,7 +175,8 @@ function App(props) {
           graph={props.macro}
           threshold={props.threshold}
           own={MACRO_SOURCE}
-          other={MICRO_SOURCE} />
+          other={MICRO_SOURCE}
+          canDownload />
       </div>
       <div style={{height: '100%', width: '50%', position: 'absolute', left: '50%'}}>
         <CommunitySelector communities={props.communities} />
