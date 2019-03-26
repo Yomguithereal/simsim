@@ -258,6 +258,16 @@ communities.forEach((c, i) => {
   DATA.micro[i].color = PALETTE[i] || '#ddd';
 });
 
+// macro.forEachEdge((e, a, s, t) => {
+//   const c = DATA.micro.find(c => c.graph.hasNode(s));
+
+//   if (!c)
+//     return;
+
+//   if (c.graph.hasNode(t) && !c.graph.hasEdge(s, t))
+//     macro.setEdgeAttribute(e, 'color', '#ff0000');
+// });
+
 // Rendering
 const body = (
   <App
