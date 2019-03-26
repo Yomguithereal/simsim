@@ -4,6 +4,7 @@ import {UndirectedGraph} from 'graphology';
 import WebGLRenderer from 'sigma/renderers/webgl';
 import circularLayout from 'graphology-layout/circular';
 import {inferSettings} from 'graphology-layout-forceatlas2';
+import density from 'graphology-metrics/density';
 import FA2Layout from 'graphology-layout-forceatlas2/worker';
 import extent from 'simple-statistics/src/extent';
 import gexf from 'graphology-gexf/browser';
@@ -106,6 +107,8 @@ class Network extends Component {
   render() {
     const offset = this.props.offset || 0;
 
+    const graph = this.props.graph;
+
     return (
       <div style={{height: '100%', width: '100%'}}>
         <div style={{height: `calc(100% - ${offset}px)`, width: '100%', top: `${offset}px`, position: 'absolute'}} ref={this.container} />
@@ -115,7 +118,10 @@ class Network extends Component {
           Stop Layout
         </button>
         <p style={{position: 'absolute', top: `${20 + offset}px`, left: '10px', zIndex: 30}}>
-          Threshold: {this.props.threshold.toFixed(2)}
+          Threshold: {this.props.threshold.toFixed(2)}<br />
+          Nodes: {graph.order}<br />
+          Edges: {graph.size}<br />
+          Density: {('' + density(graph)).slice(0, 5)}
         </p>
         {this.props.canDownload && (
           <button
@@ -227,7 +233,12 @@ communities.forEach((c, i) => {
   c.forEach(node => g.addNode(node, {label: node, color: PALETTE[i] || '#ddd'}));
 
   d.edges.forEach(([source, target, similarity]) => {
-    g.addEdge(source, target, {similarity});
+    let color = '#ccc';
+
+    if (!macro.hasEdge(source, target))
+      color = '#000';
+
+    g.addEdge(source, target, {similarity, color});
   });
 
   const nodeScale = scaleLinear()
